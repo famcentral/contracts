@@ -24,6 +24,11 @@ task("locktoken", "Send FAM to Timelock contract")
 		await token.transfer(seedAddress, seedAllocation)
 		console.log(`Lock ${seedAllocation} FAM token to ${seedAddress}`)
 
+		const publicAddress = (await hre.deployments.get("PublicTokenTimelock")).address
+		const publicAllocation = totalSupply.mul(105).div(1000) // 10.5% totalSupply
+		await token.transfer(publicAddress, publicAllocation)
+		console.log(`Lock ${publicAllocation} FAM token to ${publicAddress}`)
+
 		// Others allocation are not fixed
 		// Temporary transfer token to seperate wallet
 		const {
@@ -31,7 +36,6 @@ task("locktoken", "Send FAM to Timelock contract")
 			advisor,
 			cofounder,
 			private,
-			public,
 			liquidity,
 			reward,
 			foundation,
@@ -52,10 +56,6 @@ task("locktoken", "Send FAM to Timelock contract")
 		const privateAllocation = totalSupply.mul(6).div(100) // 6% totalSupply
 		await token.transfer(private, privateAllocation)
 		console.log(`Lock ${privateAllocation} FAM token to ${private}`)
-
-		const publicAllocation = totalSupply.mul(105).div(1000) // 10.5% totalSupply
-		await token.transfer(public, publicAllocation)
-		console.log(`Lock ${publicAllocation} FAM token to ${public}`)
 
 		const liquidityAllocation = totalSupply.mul(10).div(100) // 10% totalSupply
 		await token.transfer(liquidity, liquidityAllocation)

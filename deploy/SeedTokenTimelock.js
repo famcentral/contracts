@@ -11,7 +11,6 @@ module.exports = async function ({ getNamedAccounts, deployments, ethers }) {
   const seedAllocation = totalSupply.mul(3).div(100) // 3% totalSupply
   const seedAllocationChunk = seedAllocation.mul(10).div(100) // 10% seedAllocation
   const seedReleaseInterval = 60 * 60 * 24 * 30 // monthly
-
   await deploy("SeedTokenTimelock", {
     from: deployer,
     contract: "TokenTimelock",
@@ -20,5 +19,5 @@ module.exports = async function ({ getNamedAccounts, deployments, ethers }) {
   })
 }
 
-module.exports.tags = ["TokenTimelock"]
+module.exports.tags = ["SeedTokenTimelock"]
 module.exports.dependencies = ["FAMToken"]
