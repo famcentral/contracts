@@ -4,9 +4,7 @@ module.exports = async function ({ getNamedAccounts, deployments, ethers }) {
   const { deployer, public } = await getNamedAccounts()
   const { BigNumber } = ethers
 
-  const expandTo18Decimals = (n) => {
-    return BigNumber.from(n).mul(BigNumber.from(10).pow(18))
-  }
+  const expandTo18Decimals = (n) => BigNumber.from(n).mul(BigNumber.from(10).pow(18))
 
   const famTokenAddress = (await deployments.get("FAMToken")).address
   const publicStartedTs = Math.round(new Date("Fri Jan 01 2021 15:57:48 GMT+0700") / 1000)
