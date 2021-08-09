@@ -24,7 +24,7 @@ const config: HardhatUserConfig = {
       default: 3,
       56: '0x51caD3b9812EcD235657aa03803E459eF5D5F898'
     },
-    cofounder: {
+    founding: {
       default: 4,
       56: '0x0B887c18216bcCAf5641680D84278bCE2EEfEf91'
     },

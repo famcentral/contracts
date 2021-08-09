@@ -29,49 +29,45 @@ task("locktoken", "Send FAM to Timelock contract")
 		await token.transfer(publicAddress, publicAllocation)
 		console.log(`Lock ${publicAllocation} FAM token to ${publicAddress}`)
 
-		// Others allocation are not fixed
-		// Temporary transfer token to seperate wallet
-		const {
-			team,
-			advisor,
-			cofounder,
-			private,
-			liquidity,
-			reward,
-			foundation,
-			community } = await hre.getNamedAccounts()
-
-		const teamAllocation = totalSupply.mul(18).div(100) // 18% totalSupply
-		await token.transfer(team, teamAllocation)
-		console.log(`Lock ${teamAllocation} FAM token to ${team}`)
-
-		const advisorAllocation = totalSupply.mul(12).div(100) // 12% totalSupply
-		await token.transfer(advisor, advisorAllocation)
-		console.log(`Lock ${advisorAllocation} FAM token to ${advisor}`)
-
-		const cofounderAllocation = totalSupply.mul(5).div(1000) // 0.5% totalSupply
-		await token.transfer(cofounder, cofounderAllocation)
-		console.log(`Lock ${cofounderAllocation} FAM token to ${cofounder}`)
-
+		const privateAddress = (await hre.deployments.get("PrivateTokenTimelock")).address
 		const privateAllocation = totalSupply.mul(6).div(100) // 6% totalSupply
-		await token.transfer(private, privateAllocation)
-		console.log(`Lock ${privateAllocation} FAM token to ${private}`)
+		await token.transfer(privateAddress, privateAllocation)
+		console.log(`Lock ${privateAllocation} FAM token to ${privateAddress}`)
 
+		const liquidityAddress = (await hre.deployments.get("LiquidityTokenTimelock")).address
 		const liquidityAllocation = totalSupply.mul(10).div(100) // 10% totalSupply
-		await token.transfer(liquidity, liquidityAllocation)
-		console.log(`Lock ${liquidityAllocation} FAM token to ${liquidity}`)
+		await token.transfer(liquidityAddress, liquidityAllocation)
+		console.log(`Lock ${liquidityAllocation} FAM token to ${liquidityAddress}`)
 
-		const rewardAllocation = totalSupply.mul(16).div(100) // 16% totalSupply
-		await token.transfer(reward, rewardAllocation)
-		console.log(`Lock ${rewardAllocation} FAM token to ${reward}`)
-		
-		const foundationAllocation = totalSupply.mul(10).div(100) // 10% totalSupply
-		await token.transfer(foundation, foundationAllocation)
-		console.log(`Lock ${foundationAllocation} FAM token to ${foundation}`)
-
+		const communityAddress = (await hre.deployments.get("CommunityTokenTimelock")).address
 		const communityAllocation = totalSupply.mul(14).div(100) // 14% totalSupply
-		await token.transfer(community, communityAllocation)
-		console.log(`Lock ${communityAllocation} FAM token to ${community}`)
+		await token.transfer(communityAddress, communityAllocation)
+		console.log(`Lock ${communityAllocation} FAM token to ${communityAddress}`)
+
+		const rewardAddress = (await hre.deployments.get("RewardTokenTimelock")).address
+		const rewardAllocation = totalSupply.mul(16).div(100) // 16% totalSupply
+		await token.transfer(rewardAddress, rewardAllocation)
+		console.log(`Lock ${rewardAllocation} FAM token to ${rewardAddress}`)
+
+		const teamAddress = (await hre.deployments.get("TeamTokenTimelock")).address
+		const teamAllocation = totalSupply.mul(18).div(100) // 18% totalSupply
+		await token.transfer(teamAddress, teamAllocation)
+		console.log(`Lock ${teamAllocation} FAM token to ${teamAddress}`)
+
+		const advisorAddress = (await hre.deployments.get("AdvisorTokenTimelock")).address
+		const advisorAllocation = totalSupply.mul(12).div(100) // 12% totalSupply
+		await token.transfer(advisorAddress, advisorAllocation)
+		console.log(`Lock ${advisorAllocation} FAM token to ${advisorAddress}`)
+
+		const foundingAddress = (await hre.deployments.get("FoundingTokenTimelock")).address
+		const foundingAllocation = totalSupply.mul(5).div(1000) // 0.5% totalSupply
+		await token.transfer(foundingAddress, foundingAllocation)
+		console.log(`Lock ${foundingAllocation} FAM token to ${foundingAddress}`)
+
+		const foundationAddress = (await hre.deployments.get("ArtistFoundationTokenTimelock")).address
+		const foundationAllocation = totalSupply.mul(10).div(100) // 10% totalSupply
+		await token.transfer(foundationAddress, foundationAllocation)
+		console.log(`Lock ${foundationAllocation} FAM token to ${foundationAddress}`)
 	})
 
 task("withdrawSeed", "Withdraw FAM from Seed Timelock contract")
