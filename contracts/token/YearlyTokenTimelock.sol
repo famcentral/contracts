@@ -45,7 +45,7 @@ contract YearlyTokenTimelock {
     /**
      * @notice Transfers tokens held by timelock to beneficiary.
      */
-    function withdraw(uint yearsAfter) public {
+    function withdraw(uint256 yearsAfter) public {
         require(yearsAfter < unlockAmounts.length, 'YearlyTokenTimelock: invalid year');
         require(block.timestamp >= (startedAt + yearsAfter * 365 days), 'YearlyTokenTimelock: no tokens to release');
         uint256 amount = unlockAmounts[yearsAfter];
