@@ -70,15 +70,21 @@ task("locktoken", "Send FAM to Timelock contract")
 		console.log(`Lock ${foundationAllocation} FAM token to ${foundationAddress}`)
 	})
 
-task("withdrawSeed", "Withdraw FAM from Seed Timelock contract")
+task("deploypool", "Deploy staking pool")
 	.setAction(async (_args, hre) => {
-		const seedAddress = (await hre.deployments.get("SeedTokenTimelock")).address
-		console.log('SeedTokenTimelock Address:', seedAddress)
-		const seed = await hre.ethers.getContractAt('TokenTimelock', seedAddress)
-		await seed.withdraw()
-
+		const factoryAddress = (await hre.deployments.get("StakingPoolFactory")).address
+		console.log('StakingPoolFactory Address:', factoryAddress)
+		const factory = await hre.ethers.getContractAt('StakingPoolFactory', factoryAddress)
 		const tokenAddress = (await hre.deployments.get("FAMToken")).address
-		const token = await hre.ethers.getContractAt('FAMToken', tokenAddress)
-		const balance = await token.balanceOf(seedAddress)
-		console.log(`SeedTokenTimelock current balance: ${balance}`)
+
+		await factory.deployPool(
+			tokenAddress,
+			tokenAddress,
+			'0x437622375421d8116294426727f5216516b9A47C',
+			expandTo18Decimals(1).div(1000),
+			10012635,
+			10012635 + 86400, // 3 days
+			0,
+			'0x437622375421d8116294426727f5216516b9A47C',
+		)
 	})
