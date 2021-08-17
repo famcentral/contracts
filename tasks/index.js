@@ -78,13 +78,13 @@ task("deploypool", "Deploy staking pool")
 		const tokenAddress = (await hre.deployments.get("FAMToken")).address
 
 		await factory.deployPool(
+			'0x9804fC036a283C687f2c034bf5220070fD885A54', // FAM-BNB LP token
 			tokenAddress,
-			tokenAddress,
-			'0x437622375421d8116294426727f5216516b9A47C',
-			expandTo18Decimals(1).div(1000),
-			10012635,
-			10012635 + 86400, // 3 days
+			'0x54f7EE50bafd09845B1756e9C3B47623ec4620a4',
+			expandTo18Decimals(1157).div(10000),
+			10048469,
+			10048469 + 864000, // 30 days
 			0,
-			'0x437622375421d8116294426727f5216516b9A47C',
+			'0x54f7EE50bafd09845B1756e9C3B47623ec4620a4',
 		)
 	})
