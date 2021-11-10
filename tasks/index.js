@@ -103,5 +103,95 @@ task("initpool", "Init fixed APR staking pool")
 			10133374 + 864000 * 3, // 90 days
 			0,
 			'0xB1c40902af130b8Ef4978579176c5b6fC62c0Ef0', // FAM-Reward2
-		  )
+		)
+	})
+
+task("deployfarm2", "Deploy staking pool 2")
+	.setAction(async (_args, hre) => {
+		const factoryAddress = (await hre.deployments.get("StakingPoolFactory")).address
+		console.log('StakingPoolFactory Address:', factoryAddress)
+		const factory = await hre.ethers.getContractAt('StakingPoolFactory', factoryAddress)
+
+		await factory.deployPool(
+			'0x9804fC036a283C687f2c034bf5220070fD885A54', // FAM-BNB LP token
+			'0x4556A6f454f15C4cD57167a62bdA65A6be325D1F', // FAM token
+			'0x54f7EE50bafd09845B1756e9C3B47623ec4620a4', // FAM-Reward
+			expandTo18Decimals(868).div(10000), // 75_000 FAM
+			10953088,
+			10953088 + 864000, // 30 days
+			0,
+			'0x54f7EE50bafd09845B1756e9C3B47623ec4620a4', // FAM-Reward
+		)
+	})
+
+task("deployfarm3", "Deploy staking pool 3")
+	.setAction(async (_args, hre) => {
+		const factoryAddress = (await hre.deployments.get("StakingPoolFactory")).address
+		console.log('StakingPoolFactory Address:', factoryAddress)
+		const factory = await hre.ethers.getContractAt('StakingPoolFactory', factoryAddress)
+
+		await factory.deployPool(
+			'0x03db7a7eb9bb6a7070bcc06d09a610fb94b5e231', // FAM-BUSD LP token
+			'0x4556A6f454f15C4cD57167a62bdA65A6be325D1F', // FAM token
+			'0x0714c837863b983E0Be5F816ac11fF6AE6887F51', // FAM-Reward4
+			expandTo18Decimals(775).div(10000), // 67_000 FAM
+			11640000,
+			11640000 + 864000, // 30 days
+			0,
+			'0x0714c837863b983E0Be5F816ac11fF6AE6887F51', // FAM-Reward4
+		)
+	})
+
+task("deployfarm4", "Deploy staking pool 4")
+	.setAction(async (_args, hre) => {
+		const factoryAddress = (await hre.deployments.get("StakingPoolFactory")).address
+		console.log('StakingPoolFactory Address:', factoryAddress)
+		const factory = await hre.ethers.getContractAt('StakingPoolFactory', factoryAddress)
+
+		await factory.deployPool(
+			'0x9804fC036a283C687f2c034bf5220070fD885A54', // FAM-BNB LP token
+			'0x4556A6f454f15C4cD57167a62bdA65A6be325D1F', // FAM token
+			'0x54f7EE50bafd09845B1756e9C3B47623ec4620a4', // FAM-Reward
+			expandTo18Decimals(810).div(10000), // 70_000 FAM
+			11931080,
+			11931080 + 864000, // 30 days
+			0,
+			'0x54f7EE50bafd09845B1756e9C3B47623ec4620a4', // FAM-Reward
+		)
+	})
+
+task("deployfarm5", "Deploy staking pool 5")
+	.setAction(async (_args, hre) => {
+		const factoryAddress = (await hre.deployments.get("StakingPoolFactory")).address
+		console.log('StakingPoolFactory Address:', factoryAddress)
+		const factory = await hre.ethers.getContractAt('StakingPoolFactory', factoryAddress)
+
+		await factory.deployPool(
+			'0x03db7a7eb9bb6a7070bcc06d09a610fb94b5e231', // FAM-BUSD LP token
+			'0x4556A6f454f15C4cD57167a62bdA65A6be325D1F', // FAM token
+			'0x0714c837863b983E0Be5F816ac11fF6AE6887F51', // FAM-Reward4
+			expandTo18Decimals(810).div(10000), // 70_000 FAM
+			12528800,
+			12528800 + 864000, // 30 days
+			0,
+			'0x0714c837863b983E0Be5F816ac11fF6AE6887F51', // FAM-Reward4
+		)
+	})
+
+task("deployfarmv", "Deploy FAM-VNDT pool")
+	.setAction(async (_args, hre) => {
+		const factoryAddress = (await hre.deployments.get("StakingPoolFactory")).address
+		console.log('StakingPoolFactory Address:', factoryAddress)
+		const factory = await hre.ethers.getContractAt('StakingPoolFactory', factoryAddress)
+
+		await factory.deployPool(
+			'0x8ac202252B9D23ae971b475909236827D37efEE7', // FAM-VNDT LP token
+			'0x4556A6f454f15C4cD57167a62bdA65A6be325D1F', // FAM token
+			'0x529f330C14C5Ee13aC76bec05A27758b610E2e47', // FAM-Reward3
+			expandTo18Decimals(225).div(10000), // 19_500 FAM
+			10752710,
+			10752710 + 864000, // 30 days
+			0,
+			'0x529f330C14C5Ee13aC76bec05A27758b610E2e47', // FAM-Reward3
+		)
 	})
