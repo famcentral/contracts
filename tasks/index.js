@@ -106,6 +106,24 @@ task("initpool", "Init fixed APR staking pool")
 		)
 	})
 
+task("initpool2", "Init fixed APR staking pool 2")
+	.setAction(async (_args, hre) => {
+		const poolAddress = (await hre.deployments.get("FixedAPRStakingPool2")).address
+		console.log('FixedAPRStakingPool Address:', poolAddress)
+		const pool = await hre.ethers.getContractAt('FixedAPRStakingPool', poolAddress)
+
+		await pool.initialize(
+			'0x4556A6f454f15C4cD57167a62bdA65A6be325D1F', // FAM token
+			'0x4556A6f454f15C4cD57167a62bdA65A6be325D1F', // FAM token
+			'0xB1c40902af130b8Ef4978579176c5b6fC62c0Ef0', // FAM-Reward2
+			expandTo18Decimals(20).div(100).div(10512000), // APR 20%
+			12776700,
+			12776700 + 864000, // 30 days
+			0,
+			'0xB1c40902af130b8Ef4978579176c5b6fC62c0Ef0', // FAM-Reward2
+		)
+	})
+
 task("deployfarm2", "Deploy staking pool 2")
 	.setAction(async (_args, hre) => {
 		const factoryAddress = (await hre.deployments.get("StakingPoolFactory")).address
@@ -170,9 +188,9 @@ task("deployfarm5", "Deploy staking pool 5")
 			'0x03db7a7eb9bb6a7070bcc06d09a610fb94b5e231', // FAM-BUSD LP token
 			'0x4556A6f454f15C4cD57167a62bdA65A6be325D1F', // FAM token
 			'0x0714c837863b983E0Be5F816ac11fF6AE6887F51', // FAM-Reward4
-			expandTo18Decimals(810).div(10000), // 70_000 FAM
-			12528800,
-			12528800 + 864000, // 30 days
+			expandTo18Decimals(868).div(10000), // 75_000 FAM
+			12528801,
+			12528801 + 864000, // 30 days
 			0,
 			'0x0714c837863b983E0Be5F816ac11fF6AE6887F51', // FAM-Reward4
 		)
